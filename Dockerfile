@@ -14,12 +14,18 @@ RUN adduser \
     --no-create-home \
     --uid "${UID}" \
     appuser
-
-
-
-COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=bind,source=requirements.txt,target=requirements.txt \
+    python3 -m pip install -r requirements.txt
 
 USER appuser
+
+COPY . .
+
+ENV PORT=8000
+ARG DISCORD_TOKEN
+
+ENV DISCORD_TOKEN=${DISCORD_TOKEN}
+
+EXPOSE ${PORT} 
 
 CMD python3 app.py
