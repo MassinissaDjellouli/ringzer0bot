@@ -82,5 +82,4 @@ async def ranking(ctx):
 
 def run_bot():
     token = getenv('DISCORD_TOKEN')
-    print(bot.all_commands)
     bot.run(token)
