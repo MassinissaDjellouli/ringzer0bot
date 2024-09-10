@@ -54,6 +54,8 @@ def add_user(group_id: str, user: str):
     if not res:
         return {'success':False,'error': 'Group not found'}
     users = res["users"]
+    if user.upper() in [x.upper() for x in users]:
+        return {'success':False,'error': f'User {user} already in group'}
     users.append(user)
     doc.update({'users': users})
     return {'success': True}
@@ -63,9 +65,10 @@ def remove_user(group_id: str, user: str):
     if not res:
         return {'success':False,'error': 'Group not found'}
     users = res["users"]
-    if user not in users:
+    print(users)
+    if user.upper() not in [x.upper() for x in users]:
         return {'success':False,'error': f'User {user} not in group'}
-    users.remove(user)
+    users = [x for x in users if x.upper() != user.upper()]
     doc.update({'users': users})
     return {'success': True}
 
