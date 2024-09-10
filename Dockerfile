@@ -16,9 +16,10 @@ RUN adduser \
     appuser
 
 
-USER appuser
 
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
+
+USER appuser
 
 CMD python3 app.py
