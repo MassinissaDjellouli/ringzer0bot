@@ -65,7 +65,6 @@ def remove_user(group_id: str, user: str):
     if not res:
         return {'success':False,'error': 'Group not found'}
     users = res["users"]
-    print(users)
     if user.upper() not in [x.upper() for x in users]:
         return {'success':False,'error': f'User {user} not in group'}
     users = [x for x in users if x.upper() != user.upper()]
