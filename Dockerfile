@@ -14,11 +14,11 @@ RUN adduser \
     --no-create-home \
     --uid "${UID}" \
     appuser
-    
-RUN pip install --no-cache-dir -r requirements.txt
+
 
 USER appuser
 
 COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD python3 app.py
